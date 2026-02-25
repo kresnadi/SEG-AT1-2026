@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QMainWindow, QWidget, QApplication, QHBoxLayout, Q
 from widgets.flashcard import Flashcard
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         # Initialise our parent class
         super().__init__()
         self.setMinimumSize(800, 600)
@@ -24,13 +24,13 @@ class MainWindow(QMainWindow):
         self.central_widget.setLayout(self.central_layout)
         self.card_page.setLayout(self.card_layout)
 
-    def setup_central_widget(self):
+    def setup_central_widget(self) -> None:
         # Center the main widget horizontally
         self.central_layout.addStretch()
         self.central_layout.addWidget(self.card_page)
         self.central_layout.addStretch()
 
-    def setup_card_page(self):
+    def setup_card_page(self) -> None:
         self.flash_card = Flashcard()
         # Center our content vertically
         self.card_layout.addStretch()

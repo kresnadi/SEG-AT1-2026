@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QFrame, QLabel, QVBoxLayout
 from PySide6.QtCore import Qt, QRect
 
 class Flashcard(QFrame):
-    def __init__(self):
+    def __init__(self) -> None:
         # Initialise our parent class
         super().__init__()
         self.flashcard_layout = QVBoxLayout()
@@ -23,7 +23,7 @@ class Flashcard(QFrame):
         # Assign the layout to our parent card
         self.setLayout(self.flashcard_layout)
 
-    def style_card(self):
+    def style_card(self) -> None:
         # Style our flashcard to look vaguely real
         self.setFixedSize(600, 400)
         self.setStyleSheet("""
@@ -33,11 +33,11 @@ class Flashcard(QFrame):
         """)
         self.flashcard_text.setStyleSheet("color: black; font-size: 18pt;")
 
-    def populate_card(self):
+    def populate_card(self) -> None:
         # Center our text horizontally
         self.flashcard_layout.addStretch()
         self.flashcard_layout.addWidget(self.flashcard_text)
         self.flashcard_layout.addStretch()
 
-    def set_text(self, text):
+    def set_text(self, text) -> None:
         self.flashcard_text.setText(text)
