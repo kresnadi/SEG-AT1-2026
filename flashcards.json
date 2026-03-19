@@ -1,0 +1,36 @@
+{
+    "Set 1": {
+        "creation_date": "some random date",
+        "cards": [
+            {
+                "question": "Original Capital of Japan",
+                "answer": "Kyoto"
+            },
+            {
+                "question": "Country of Taj Mahal",
+                "answer": "Pakistan"
+            },
+            {
+                "question": "Country of the Eifel Tower",
+                "answer": "Rome"
+            }
+        ]
+    },
+    "Set 2": {
+        "creation_date": "some random date",
+        "cards": [
+            {
+                "question": "this is a test question",
+                "answer": "this is an answer"
+            },
+            {
+                "question": "this is a test question 2",
+                "answer": "this is an answer 2"
+            },
+            {
+                "question": "this is a test question three",
+                "answer": "this is an answer three"
+            }
+        ]
+    } 
+}
