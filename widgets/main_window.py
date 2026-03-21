@@ -24,8 +24,8 @@ class MainWindow(QMainWindow):
         self.home_page = QWidget()
         self.home_layout = QHBoxLayout()
 
-        self.add_card_page   = QWidget()
-        self.add_card_layout = QVBoxLayout()
+        self.edit_page   = QWidget()
+        self.edit_layout = QVBoxLayout()
 
         # Create card widgets
         self.card_page = QWidget()
@@ -44,13 +44,18 @@ class MainWindow(QMainWindow):
             "card": self.card_page,
             "quiz": self.quiz_page,
             "mark": self.mark_page,
-            "add": self.add_card_page
+            "edit": self.edit_page
+        }
+
+        self.icons = {
+            "flip": "./icons/flip.png",
+            "next": "./icons/next.png"
         }
 
         # Add all widgets and stretch objects to layouts
         self.setup_central_widget()
         self.setup_home_page()
-        self.setup_add_card_page()
+        self.setup_edit_page()
         self.setup_card_page()
         self.setup_quiz_page()
         self.setup_mark_page()
@@ -58,7 +63,7 @@ class MainWindow(QMainWindow):
         # Assign layouts to our widgets
         self.central_widget.setLayout(self.central_layout)
         self.home_page.setLayout(self.home_layout)
-        self.add_card_page.setLayout(self.add_card_layout)
+        self.edit_page.setLayout(self.edit_layout)
         self.card_page.setLayout(self.card_layout)
         self.quiz_page.setLayout(self.quiz_layout)
         self.mark_page.setLayout(self.mark_layout)
@@ -86,9 +91,19 @@ class MainWindow(QMainWindow):
         self.create_set = QPushButton()
         self.create_set.setIconSize(QSize(48, 48))
         self.create_set.setIcon(QPixmap("./icons/add.png"))
+
+        self.edit_set = QPushButton()
+        self.edit_set.setIconSize(QSize(48, 48))
+        self.edit_set.setIcon(QPixmap("./icons/edit.png"))
+
+        self.open_set = QPushButton()
+        self.open_set.setIconSize(QSize(48, 48))
+        self.open_set.setIcon(QPixmap("./icons/play.png"))
         
         self.button_layout.addStretch()
         self.button_layout.addWidget(self.create_set)
+        self.button_layout.addWidget(self.edit_set)
+        self.button_layout.addWidget(self.open_set)
         self.button_layout.addStretch()
 
         self.home_content_layout.addStretch()
@@ -107,22 +122,28 @@ class MainWindow(QMainWindow):
 
         self.widget_page.addWidget(self.home_page)
 
-    def setup_add_card_page(self) -> None:
-        self.add_card_top_layout = QHBoxLayout()
+    def setup_edit_page(self) -> None:
+        self.edit_top_layout = QHBoxLayout()
 
-        self.add_card_back_button = QPushButton()
-        self.add_card_back_button.setText("Back")
-        self.add_card_back_button.setIconSize(QSize(24, 24))
-        self.add_card_back_button.setIcon(QPixmap("./icons/return.png"))
+        self.edit_back_button = QPushButton()
+        self.edit_back_button.setText("Back")
+        self.edit_back_button.setIconSize(QSize(24, 24))
+        self.edit_back_button.setIcon(QPixmap("./icons/return.png"))
 
-        # self.add_card_title_label = QLabel()
-        # self.add_card_title_label.setText("New Card Set")
-        # self.add_card_title_label.setStyleSheet("font-size: 16pt;")
-        # self.add_card_title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.edit_delete_button = QPushButton()
+        self.edit_delete_button.setText("Delete Set")
+        self.edit_delete_button.setIconSize(QSize(24, 24))
+        self.edit_delete_button.setIcon(QPixmap("./icons/delete.png"))
 
-        self.add_card_top_layout.addWidget(self.add_card_back_button)
-        #self.add_card_top_layout.addWidget(self.add_card_title_label)
-        self.add_card_top_layout.addStretch()
+        # self.edit_title_label = QLabel()
+        # self.edit_title_label.setText("New Card Set")
+        # self.edit_title_label.setStyleSheet("font-size: 16pt;")
+        # self.edit_title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.edit_top_layout.addWidget(self.edit_back_button)
+        #self.edit_top_layout.addWidget(self.edit_title_label)
+        self.edit_top_layout.addStretch()
+        self.edit_top_layout.addWidget(self.edit_delete_button)
 
         self.set_name_layout = QHBoxLayout()
 
@@ -159,10 +180,10 @@ class MainWindow(QMainWindow):
         self.added_cards_list.setAlternatingRowColors(True)
         self.added_cards_list.setFixedSize(500, 300)
 
-        self.add_card_bottom_layout = QHBoxLayout()
+        self.edit_bottom_layout = QHBoxLayout()
 
         self.remove_card_button = QPushButton()
-        self.remove_card_button.setText("Remove Selected")
+        self.remove_card_button.setText("Remove Selected Card")
         self.remove_card_button.setIconSize(QSize(24, 24))
         self.remove_card_button.setIcon(QPixmap("./icons/delete.png"))
 
@@ -171,32 +192,32 @@ class MainWindow(QMainWindow):
         self.save_set_button.setIconSize(QSize(24, 24))
         self.save_set_button.setIcon(QPixmap("./icons/check.png"))
 
-        self.add_card_bottom_layout.addStretch()
-        self.add_card_bottom_layout.addWidget(self.remove_card_button)
-        self.add_card_bottom_layout.addWidget(self.save_set_button)
-        self.add_card_bottom_layout.addStretch()
+        self.edit_bottom_layout.addStretch()
+        self.edit_bottom_layout.addWidget(self.remove_card_button)
+        self.edit_bottom_layout.addWidget(self.save_set_button)
+        self.edit_bottom_layout.addStretch()
 
-        self.add_card_content_layout = QVBoxLayout()
+        self.edit_content_layout = QVBoxLayout()
 
-        self.add_card_content_layout.addStretch()
-        self.add_card_content_layout.addLayout(self.add_card_top_layout)
-        self.add_card_content_layout.addStretch()
-        self.add_card_content_layout.addLayout(self.set_name_layout)
-        self.add_card_content_layout.addLayout(self.card_entry_layout)
-        self.add_card_content_layout.addStretch()
-        self.add_card_content_layout.addWidget(
+        self.edit_content_layout.addStretch()
+        self.edit_content_layout.addLayout(self.edit_top_layout)
+        self.edit_content_layout.addStretch()
+        self.edit_content_layout.addLayout(self.set_name_layout)
+        self.edit_content_layout.addLayout(self.card_entry_layout)
+        self.edit_content_layout.addStretch()
+        self.edit_content_layout.addWidget(
             self.added_cards_list,
             alignment=Qt.AlignmentFlag.AlignHCenter,
         )
-        self.add_card_content_layout.addStretch()
-        self.add_card_content_layout.addLayout(self.add_card_bottom_layout)
-        self.add_card_content_layout.addStretch()
+        self.edit_content_layout.addStretch()
+        self.edit_content_layout.addLayout(self.edit_bottom_layout)
+        self.edit_content_layout.addStretch()
 
-        self.add_card_layout.addStretch()
-        self.add_card_layout.addLayout(self.add_card_content_layout)
-        self.add_card_layout.addStretch()
+        self.edit_layout.addStretch()
+        self.edit_layout.addLayout(self.edit_content_layout)
+        self.edit_layout.addStretch()
 
-        self.widget_page.addWidget(self.add_card_page)
+        self.widget_page.addWidget(self.edit_page)
 
     def setup_card_page(self) -> None:
         self.flash_card = Flashcard()
@@ -218,11 +239,6 @@ class MainWindow(QMainWindow):
         self.previous_button.setIconSize(QSize(24, 24))
         self.previous_button.setIcon(QPixmap("./icons/back.png"))
 
-        self.repeat_button = QPushButton()
-        self.repeat_button.setText("Repeat Card")
-        self.repeat_button.setIconSize(QSize(24, 24))
-        self.repeat_button.setIcon(QPixmap("./icons/repeat.png"))
-
         self.next_button = QPushButton()
         self.next_button.setText("Reveal")
         self.next_button.setIconSize(QSize(24, 24))
@@ -238,7 +254,6 @@ class MainWindow(QMainWindow):
         # Center the control buttons
         self.button_layout.addStretch()
         self.button_layout.addWidget(self.previous_button)
-        self.button_layout.addWidget(self.repeat_button)
         self.button_layout.addWidget(self.next_button)
         self.button_layout.addStretch()
 
@@ -255,8 +270,10 @@ class MainWindow(QMainWindow):
 
     def setup_quiz_page(self) -> None:
         self.quiz_content_layout = QVBoxLayout()
+
         self.question_label = QLabel()
         self.question_label.setText("Question")
+        self.question_label.setStyleSheet("font-size: 12pt;")
 
         self.answer_layout = QHBoxLayout()
 
@@ -356,10 +373,7 @@ class MainWindow(QMainWindow):
         self.widget_page.addWidget(self.mark_page)
 
     def switch_next_button_icon(self, icon) -> None:
-        if icon == "flip":
-            self.next_button.setIcon(QPixmap("./icons/flip.png"))
-        elif icon == "next":
-            self.next_button.setIcon(QPixmap("./icons/next.png"))
+        self.next_button.setIcon(QPixmap(self.icons[icon]))
 
     def switch_page(self, page):
         self.current_page = page
@@ -409,7 +423,7 @@ class MainWindow(QMainWindow):
         self.added_cards_list.addItem(item)
         self.added_cards_list.setItemWidget(item, item_widget)
 
-    def clear_add_card_page(self) -> None:
+    def clear_edit_page(self) -> None:
         self.set_name_field.clear()
         self.term_field.clear()
         self.definition_field.clear()
