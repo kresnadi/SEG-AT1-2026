@@ -299,6 +299,7 @@ def handle_edit_card_button():
  
     window.clear_edit_page()
     #window.set_add_card_page_edit_mode(selected_set)
+    window.set_name_field.setText(selected_set)
  
     for card in new_cards:
         window.add_card_to_list(card["question"], card["answer"])
