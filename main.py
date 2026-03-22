@@ -526,6 +526,7 @@ def main() -> int:
 
     # Create and show our application's window
     app = QApplication(sys.argv)
+    app.
     window = MainWindow()
     window.show()
 

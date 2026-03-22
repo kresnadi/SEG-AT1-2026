@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QMainWindow, QWidget, QStackedWidget, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit, QListWidget, QListWidgetItem, QMessageBox
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QPixmap, QPalette, QColor
 from PySide6.QtCore import Qt, QSize
 from widgets.flashcard import Flashcard
 
@@ -52,6 +52,9 @@ class MainWindow(QMainWindow):
             "next": "./icons/next.png"
         }
 
+        # Apply colour palette
+        self.apply_palette()
+
         # Add all widgets and stretch objects to layouts
         self.setup_central_widget()
         self.setup_home_page()
@@ -67,6 +70,42 @@ class MainWindow(QMainWindow):
         self.card_page.setLayout(self.card_layout)
         self.quiz_page.setLayout(self.quiz_layout)
         self.mark_page.setLayout(self.mark_layout)
+
+    def apply_palette(self):
+        palette = QPalette()
+        
+        # Base colors
+        palette.setColor(QPalette.ColorRole.Window,          QColor(30, 30, 30))
+        palette.setColor(QPalette.ColorRole.WindowText,      QColor(220, 220, 220))
+        palette.setColor(QPalette.ColorRole.Base,            QColor(22, 22, 22))
+        palette.setColor(QPalette.ColorRole.AlternateBase,   QColor(40, 40, 40))
+        palette.setColor(QPalette.ColorRole.Text,            QColor(220, 220, 220))
+        palette.setColor(QPalette.ColorRole.BrightText,      Qt.GlobalColor.white)
+        
+        # Buttons
+        palette.setColor(QPalette.ColorRole.Button,          QColor(45, 45, 45))
+        palette.setColor(QPalette.ColorRole.ButtonText,      QColor(220, 220, 220))
+        
+        # Highlights / selection
+        palette.setColor(QPalette.ColorRole.Highlight,       QColor(42, 130, 218))
+        palette.setColor(QPalette.ColorRole.HighlightedText, Qt.GlobalColor.white)
+        
+        # Links
+        palette.setColor(QPalette.ColorRole.Link,            QColor(42, 130, 218))
+        palette.setColor(QPalette.ColorRole.LinkVisited,     QColor(130, 90, 200))
+        
+        # Tooltips
+        palette.setColor(QPalette.ColorRole.ToolTipBase,     QColor(50, 50, 50))
+        palette.setColor(QPalette.ColorRole.ToolTipText,     QColor(220, 220, 220))
+        
+        # Disabled state — same roles under the Disabled color group
+        disabled = QPalette.ColorGroup.Disabled
+        palette.setColor(disabled, QPalette.ColorRole.WindowText, QColor(120, 120, 120))
+        palette.setColor(disabled, QPalette.ColorRole.Text,       QColor(120, 120, 120))
+        palette.setColor(disabled, QPalette.ColorRole.ButtonText, QColor(120, 120, 120))
+        palette.setColor(disabled, QPalette.ColorRole.Highlight,  QColor(80, 80, 80))
+        
+        self.setPalette(palette)
 
     def setup_central_widget(self) -> None:
         # Center the main widget horizontally
