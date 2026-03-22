@@ -526,7 +526,7 @@ def main() -> int:
 
     # Create and show our application's window
     app = QApplication(sys.argv)
-    app.
+    app.setStyle("Fusion")
     window = MainWindow()
     window.show()
 
